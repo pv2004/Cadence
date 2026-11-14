@@ -21,7 +21,7 @@ export default defineConfig(() => {
         manifest: {
           id: '/',
           name: 'Cadence — Minimal Habit Tracker',
-          short_name: 'Streak',
+          short_name: 'Cadence',
           description:
             'Minimal, local-first habit tracker and streak heatmap for iPhone.',
           theme_color: '#0d0d0d',

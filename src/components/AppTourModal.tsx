@@ -31,7 +31,7 @@ const TOUR_STEPS = [
   {
     id: 'welcome',
     badge: 'Step 1 of 5 · Personalize',
-    title: 'Welcome to Streak',
+    title: 'Welcome to Cadence',
     subtitle:
       'Build lasting daily rituals with Habit Strength momentum, 52-week heatmaps, focus sessions, and a living Voxel Island.',
   },
@@ -127,7 +127,7 @@ export const AppTourModal: React.FC<AppTourModalProps> = ({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Welcome to Streak App Tour"
+      aria-label="Welcome to Cadence App Tour"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md"
     >
       <div
@@ -216,7 +216,7 @@ export const AppTourModal: React.FC<AppTourModalProps> = ({
             >
               <img
                 src="/apple-touch-icon.png?v=2"
-                alt="Streak Icon"
+                alt="Cadence Icon"
                 className="w-12 h-12 rounded-[14px] shadow-md shrink-0 object-cover"
               />
               <div className="min-w-0 flex-1">

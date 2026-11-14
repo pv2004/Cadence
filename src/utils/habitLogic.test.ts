@@ -362,9 +362,9 @@ test('generateFullExportCSV exports Habit Summary, Habit Log, and Timer Log rows
   assert.ok(lines[3].startsWith('Timer Log,2026-11-12,2026,11,November,12,Thursday,'));
   assert.ok(lines[3].includes(',pomodoro,35,'));
 
-  // Round-trip import of Streak Full Export CSV restores habits, completions, and timer logs
+  // Round-trip import of Cadence Full Export CSV restores habits, completions, and timer logs
   const roundTrip = parseHabitImportCSV(csv, '2026-11-12');
-  assert.equal(roundTrip.source, 'Streak CSV Backup');
+  assert.equal(roundTrip.source, 'Cadence CSV Backup');
   assert.equal(roundTrip.habits.length, 1);
   assert.equal(roundTrip.habits[0].name, 'Read 20 mins');
   assert.equal(roundTrip.completions.length, 1);

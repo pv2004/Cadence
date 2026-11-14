@@ -788,10 +788,10 @@ export function parseHabitImportCSV(
     const habits = Array.from(habitById.values());
     const completions = Array.from(completionsMap.values());
     if (habits.length === 0 && focusSessions.length === 0) {
-      throw new Error('No valid records found in Streak CSV export.');
+      throw new Error('No valid records found in Cadence CSV export.');
     }
     return {
-      source: 'Streak CSV Backup',
+      source: 'Cadence CSV Backup',
       habits,
       completions,
       focusSessions,

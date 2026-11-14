@@ -32,7 +32,7 @@ export function evaluateDueReminders(
   const due = checkDueReminders(habits, compMap, new Date(), firedKeys);
   for (const alert of due) {
     try {
-      new Notification(`Streak Reminder: ${alert.habitName}`, {
+      new Notification(`Cadence Reminder: ${alert.habitName}`, {
         body: `Time for "${alert.habitName}" (${alert.reminderTime})`,
         icon: '/icon.svg',
       });

@@ -564,13 +564,13 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
           </div>
         </div>
 
-        {/* Streak Color Themes */}
+        {/* Cadence Color Themes */}
         <div className="pt-1">
           <label
             className="block text-xs font-bold mb-2.5"
             style={{ color: surface.text }}
           >
-            Streak Color Palette
+            Cadence Color Palette
           </label>
           <div className="grid grid-cols-2 gap-2.5">
             {(Object.keys(ACCENT_PALETTES) as AccentColorId[]).map(
@@ -887,14 +887,14 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
           <div className="flex flex-col items-center shrink-0">
             <img
               src="/apple-touch-icon.png?v=2"
-              alt="Streak iPhone Home Screen Icon"
+              alt="Cadence iPhone Home Screen Icon"
               className="w-14 h-14 rounded-[14px] shadow-md object-cover border border-white/10"
             />
             <span
               className="text-[10px] font-semibold mt-1 tracking-tight"
               style={{ color: surface.text }}
             >
-              Streak
+              Cadence
             </span>
           </div>
           <p
@@ -906,7 +906,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
             bottom bar and choose{' '}
             <strong style={{ color: surface.text }}>Add to Home Screen</strong>.
             Your iPhone will add this custom{' '}
-            <strong style={{ color: surface.text }}>Streak</strong> icon to your
+            <strong style={{ color: surface.text }}>Cadence</strong> icon to your
             Home Screen.
           </p>
         </div>
@@ -1028,7 +1028,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   className="text-[10px] leading-tight"
                   style={{ color: surface.muted }}
                 >
-                  Restore Streak CSV, Loop, HabitKit, HabitBull
+                  Restore Cadence CSV, Loop, HabitKit, HabitBull
                 </p>
               </button>
 
@@ -1076,7 +1076,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   className="text-[10px] leading-tight"
                   style={{ color: surface.muted }}
                 >
-                  Restore from a Streak .json backup file
+                  Restore from a Cadence .json backup file
                 </p>
               </button>
             </div>
@@ -1131,7 +1131,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
             type="button"
             onClick={async () => {
               await onResetSampleData();
-              setStatusMessage('Sample Streak habits restored.');
+              setStatusMessage('Sample Cadence habits restored.');
             }}
             className="text-xs font-bold underline"
             style={{ color: surface.muted }}

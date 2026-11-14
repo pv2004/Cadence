@@ -37,8 +37,8 @@ export interface AccentPalette {
 export const ACCENT_PALETTES: Record<AccentColorId, AccentPalette> = {
   streak_brand: {
     id: 'streak_brand',
-    name: 'Streak Default',
-    label: 'Streak Default',
+    name: 'Cadence Default',
+    label: 'Cadence Default',
     hex: '#7C3AED',
     rgb: '124 58 237',
     dark: {

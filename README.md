@@ -1,11 +1,11 @@
 <div align="center">
-  <img src="public/apple-touch-icon.png" alt="Streak App Icon" width="112" height="112" style="border-radius: 26px;" />
+  <img src="public/apple-touch-icon.png" alt="Cadence App Icon" width="112" height="112" style="border-radius: 26px;" />
 
-  # Streak — Minimal Habit Tracker & Focus PWA
+  # Cadence — Minimal Habit Tracker & Focus PWA
 
   **A local-first, privacy-focused iPhone Progressive Web App for building daily rituals, visualizing 52-week activity heatmaps, running deep-work Pomodoro sessions, and growing an isometric Voxel Island.**
 
-  Built & Designed by **Hari Vineeth**
+  Built & Designed by **Vineeth**
 
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
   [![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -70,8 +70,8 @@
   - **Express**: Large hero cards with custom **Habit Cover Photos**.
 - **2 Today Card Layouts**: Switch instantly between **Compact List** and **2-Column Grid** directly from the Today header.
 - **5 App Background Styles**: `Solid`, `Subtle Gradient`, `Dot Matrix`, `True-Black OLED`, and `Custom Photo Backdrop`.
-- **11 Curated Color Palettes**: Including *Streak Brand (Violet)*, *Mykonos (Aegean Blue)*, *Emerald Forest*, *Sunset Coral*, *Cyber Amber*, *Rose Quartz*, and *Monochrome*.
-- **Personal Greeting & Hourly Single-Line Motivational Quotes**: Customizable greeting (`Hi, Vineeth`) paired with a single-line habit motivation quote that rotates automatically every hour (with a manual refresh button).
+- **11 Curated Color Palettes**: Including *Cadence Brand (Violet)*, *Mykonos (Aegean Blue)*, *Emerald Forest*, *Sunset Coral*, *Cyber Amber*, *Rose Quartz*, and *Monochrome*.
+- **Personal Greeting & Hourly Single-Line Motivational Quotes**: Customizable greeting (`Hi, Alex` or `Today`) paired with a single-line habit motivation quote that rotates automatically every hour (with a manual refresh button).
 
 ### 3. Focus / Pomodoro Timer & Web Audio Soundscapes
 - **Pomodoro & Stopwatch Modes**: Choose quick presets (`15m`, `25m`, `45m`, `60m`) or set your own **Custom Focus (`1–240m`) & Break (`1–60m`)** duration.
@@ -95,8 +95,9 @@
 ### 6. Unified CSV / JSON Backup, Restore & App Showcase Mode
 - **Unified "Import & Export Data" Hub**:
   - **Export to CSV**: Exports a comprehensive `.csv` file (`RecordType`, `Date`, `Year`, `MonthNumber`, `MonthName`, `DayOfMonth`, `DayOfWeek`, `TimestampISO`, `HabitName`, `Category`, `Status`, `LoggedValue`, `CurrentStreak`, `BestStreak`, `HabitStrengthPercent`, `TimerMode`, `TimerDurationMinutes`, `Details`) covering all habit summaries, daily check-in logs, and Pomodoro/Stopwatch timer logs.
-  - **Import from CSV**: Full round-trip restore of Streak CSV backups, plus automatic migration from **Loop Habit Tracker**, **HabitKit**, **HabitBull**, **Habitica**, or generic CSV files.
+  - **Import from CSV**: Full round-trip restore of Cadence CSV backups, plus automatic migration from **Loop Habit Tracker**, **HabitKit**, **HabitBull**, **Habitica**, or generic CSV files.
   - **Export / Import JSON**: Full application state snapshot including preferences and Voxel Island progress.
+- **First-Time Interactive App Tour & Clean 0-Data Start**: First-time visitors get a 5-step onboarding tour and start with zero pre-filled habits or logs.
 - **App Showcase Mode**: One-tap toggle at the bottom of Settings to preview 320 days of rich demonstration data without overwriting or losing your personal data.
 
 ---
@@ -107,7 +108,7 @@
 1. Open the deployed app URL in **Safari** on your iPhone.
 2. Tap the **Share** button at the bottom of Safari.
 3. Scroll down and tap **Add to Home Screen**.
-4. Tap **Add** — the custom **Streak** icon will appear on your iPhone Home Screen and launch in full-screen standalone mode with offline support.
+4. Tap **Add** — the custom **Cadence** icon will appear on your iPhone Home Screen and launch in full-screen standalone mode with offline support.
 
 ### Daily Workflow
 1. **Check In on Today**: Tap any checkmark on the **Today** screen (or tap a past day in the 5-day/7-day strip) to mark a habit complete. For quantitative habits (like *Drink water* or *Read before bed*), tap to increment or open the habit to adjust amounts.
@@ -137,8 +138,8 @@
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/YOUR_USERNAME/streak-habit-tracker.git
-cd streak-habit-tracker
+git clone https://github.com/YOUR_USERNAME/cadence-habit-tracker.git
+cd cadence-habit-tracker
 npm install
 ```
 
@@ -174,5 +175,5 @@ All habit definitions, daily check-in records, focus timer logs, and Voxel Islan
 
 ## 👤 Author
 
-**Hari Vineeth**
+**Vineeth**
 - Designed and engineered with a focus on tactile mobile UX, local-first privacy, and long-term habit consistency.

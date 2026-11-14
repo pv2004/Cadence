@@ -577,7 +577,7 @@ export async function exportBackupData(): Promise<BackupPayload> {
   return {
     version: 1,
     exportedAt: new Date().toISOString(),
-    app: 'Streak',
+    app: 'Cadence',
     habits: data.habits,
     completions: data.completions,
     preferences: data.preferences,

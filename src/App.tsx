@@ -395,7 +395,7 @@ export default function App() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `streak-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `cadence-backup-${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -417,7 +417,7 @@ export default function App() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `streak-full-export-${todayStr}.csv`;
+    a.download = `cadence-full-export-${todayStr}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -637,14 +637,14 @@ export default function App() {
           >
             <img
               src="/apple-touch-icon.png?v=2"
-              alt="Streak App Icon"
+              alt="Cadence App Icon"
               className="w-6 h-6 rounded-[7px] shadow-xs object-cover"
             />
             <span
               className="text-sm font-extrabold tracking-tight"
               style={{ color: surface.text }}
             >
-              Streak
+              Cadence
             </span>
           </button>
 
