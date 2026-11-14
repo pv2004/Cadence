@@ -331,20 +331,28 @@ export async function loadAllData(): Promise<{
     }
   );
 
-  const cleanStartFlag = localStorage.getItem('cadence_clean_zero_start_v4');
+  const cleanStartFlag = localStorage.getItem('cadence_clean_zero_start_v5');
+  const onboardingDone =
+    localStorage.getItem('streak_onboarding_completed_v1') === 'true';
 
-  if (!cleanStartFlag && !isShowcaseModeActive()) {
+  if ((!cleanStartFlag || !onboardingDone) && !isShowcaseModeActive()) {
     const userHabits = habits.filter((h) => !h.isSample);
     const userCompletions = completionsArr.filter((c) => !c.isSample);
+    const cleanedName =
+      !onboardingDone ||
+      !prefs?.userName ||
+      prefs.userName.trim().toLowerCase() === 'vineeth'
+        ? ''
+        : prefs.userName;
+
     const mergedPrefs: UserPreferences = {
       ...DEFAULT_PREFERENCES,
       ...(prefs || {}),
-      userName:
-        prefs?.userName === 'Vineeth' ? '' : (prefs?.userName ?? ''),
+      userName: cleanedName,
     };
 
     await saveBulkData(userHabits, userCompletions, mergedPrefs);
-    localStorage.setItem('cadence_clean_zero_start_v4', 'true');
+    localStorage.setItem('cadence_clean_zero_start_v5', 'true');
 
     const map: Record<string, HabitCompletion> = {};
     for (const c of userCompletions) {
@@ -357,6 +365,15 @@ export async function loadAllData(): Promise<{
     };
   }
 
+  const sanitizedPrefs: UserPreferences = {
+    ...DEFAULT_PREFERENCES,
+    ...(prefs || {}),
+    userName:
+      prefs?.userName?.trim().toLowerCase() === 'vineeth'
+        ? ''
+        : (prefs?.userName ?? ''),
+  };
+
   const completions: Record<string, HabitCompletion> = {};
   for (const c of completionsArr) {
     completions[c.id] = c;
@@ -365,7 +382,7 @@ export async function loadAllData(): Promise<{
   return {
     habits: habits.sort((a, b) => a.order - b.order),
     completions,
-    preferences: { ...DEFAULT_PREFERENCES, ...(prefs || {}) },
+    preferences: sanitizedPrefs,
   };
 }
 

@@ -72,7 +72,18 @@ export const AppTourModal: React.FC<AppTourModalProps> = ({
   onComplete,
 }) => {
   const [stepIndex, setStepIndex] = useState(0);
-  const [nameDraft, setNameDraft] = useState(preferences.userName || '');
+  const [nameDraft, setNameDraft] = useState(() => {
+    const raw = (preferences.userName || '').trim();
+    if (!raw || raw.toLowerCase() === 'vineeth') return '';
+    try {
+      if (localStorage.getItem('streak_onboarding_completed_v1') !== 'true') {
+        return '';
+      }
+    } catch {
+      return '';
+    }
+    return raw;
+  });
 
   const palette =
     ACCENT_PALETTES[preferences.accentColor] || ACCENT_PALETTES.streak_brand;
