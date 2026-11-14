@@ -51,6 +51,7 @@ import { ACCENT_PALETTES, hexWithAlpha } from './utils/themes';
 import { setHapticsEnabled, triggerHaptic } from './utils/haptics';
 import { BottomNavigation } from './components/BottomNavigation';
 import { HabitForm } from './components/HabitForm';
+import { AppTourModal } from './components/AppTourModal';
 import { TodayScreen } from './screens/Today';
 import { HabitsScreen } from './screens/Habits';
 import { FocusScreen } from './screens/Focus';
@@ -82,6 +83,16 @@ export default function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [showHabitForm, setShowHabitForm] = useState(false);
   const [editingHabit, setEditingHabit] = useState<Habit | null>(null);
+  const [showAppTour, setShowAppTour] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('autostart') === '1') return false;
+      return localStorage.getItem('streak_onboarding_completed_v1') !== 'true';
+    } catch {
+      return false;
+    }
+  });
 
   const [systemDark, setSystemDark] = useState<boolean>(() =>
     typeof window !== 'undefined' && window.matchMedia
@@ -497,6 +508,9 @@ export default function App() {
     await clearAllDatabaseData();
     setHabits([]);
     setCompletions([]);
+    setFocusSessions([]);
+    setIslandState(DEFAULT_ISLAND_STATE);
+    setIsShowcaseMode(false);
     setSelectedHabitId(null);
   };
 
@@ -728,6 +742,10 @@ export default function App() {
             isShowcaseMode={isShowcaseMode}
             onToggleShowcaseData={handleToggleShowcaseData}
             onClose={() => setShowSettings(false)}
+            onReplayTour={() => {
+              setShowSettings(false);
+              setShowAppTour(true);
+            }}
             canInstallPwa={Boolean(deferredPrompt)}
             onTriggerInstallPwa={handleTriggerInstallPwa}
           />
@@ -750,7 +768,7 @@ export default function App() {
           <TodayScreen
             habits={habits}
             completions={completions}
-            userName={preferences.userName ?? 'Vineeth'}
+            userName={preferences.userName ?? ''}
             accentColor={preferences.accentColor}
             interfaceStyle={preferences.interfaceStyle}
             todayCardLayout={preferences.todayCardLayout}
@@ -849,6 +867,27 @@ export default function App() {
           onClose={() => {
             setShowHabitForm(false);
             setEditingHabit(null);
+          }}
+        />
+      )}
+
+      {/* First-Time Interactive App Tour Modal */}
+      {!loading && showAppTour && (
+        <AppTourModal
+          preferences={preferences}
+          isDark={isDark}
+          onUpdatePreferences={handleUpdatePreferences}
+          onComplete={(openCreateHabit) => {
+            try {
+              localStorage.setItem('streak_onboarding_completed_v1', 'true');
+            } catch {
+              // ignore storage errors
+            }
+            setShowAppTour(false);
+            if (openCreateHabit) {
+              setEditingHabit(null);
+              setShowHabitForm(true);
+            }
           }}
         />
       )}

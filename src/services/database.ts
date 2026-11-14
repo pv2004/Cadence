@@ -18,7 +18,7 @@ const DB_VERSION = 1;
 
 export const DEFAULT_PREFERENCES: UserPreferences = {
   id: 'default',
-  userName: 'Vineeth',
+  userName: '',
   themeMode: 'dark',
   interfaceStyle: 'minimal',
   appBackground: 'solid',
@@ -36,7 +36,7 @@ export const DEFAULT_PREFERENCES: UserPreferences = {
 
 export const DEFAULT_ISLAND_STATE: IslandState = {
   name: 'Mykonos Sanctuary',
-  unlockedIds: ['pueblo_villa', 'cala_lighthouse', 'huerta_olive', 'caleta_boat'],
+  unlockedIds: [],
   rotation: 0,
   lighting: 'day',
 };
@@ -331,35 +331,27 @@ export async function loadAllData(): Promise<{
     }
   );
 
-  const seededFlag = localStorage.getItem('cadence_streak_seeded_v3');
+  const cleanStartFlag = localStorage.getItem('cadence_clean_zero_start_v4');
 
-  if (!seededFlag) {
+  if (!cleanStartFlag && !isShowcaseModeActive()) {
     const userHabits = habits.filter((h) => !h.isSample);
     const userCompletions = completionsArr.filter((c) => !c.isSample);
-
-    const todayStr = formatDateKey(new Date());
-    const seed = buildSampleSeedData(todayStr);
-
-    const mergedHabits = [
-      ...userHabits,
-      ...seed.habits.map((sh, i) => ({ ...sh, order: userHabits.length + i })),
-    ];
-    const mergedCompletions = [...userCompletions, ...seed.completions];
     const mergedPrefs: UserPreferences = {
       ...DEFAULT_PREFERENCES,
       ...(prefs || {}),
-      accentColor: 'streak_brand',
+      userName:
+        prefs?.userName === 'Vineeth' ? '' : (prefs?.userName ?? ''),
     };
 
-    await saveBulkData(mergedHabits, mergedCompletions, mergedPrefs);
-    localStorage.setItem('cadence_streak_seeded_v3', 'true');
+    await saveBulkData(userHabits, userCompletions, mergedPrefs);
+    localStorage.setItem('cadence_clean_zero_start_v4', 'true');
 
     const map: Record<string, HabitCompletion> = {};
-    for (const c of mergedCompletions) {
+    for (const c of userCompletions) {
       map[c.id] = c;
     }
     return {
-      habits: mergedHabits.sort((a, b) => a.order - b.order),
+      habits: userHabits.sort((a, b) => a.order - b.order),
       completions: map,
       preferences: mergedPrefs,
     };
@@ -521,7 +513,9 @@ export async function clearSampleDataFromDB(): Promise<void> {
 
 export async function clearAllDataFromDB(): Promise<void> {
   const db = await openDatabase();
-  localStorage.setItem('cadence_streak_seeded_v2', 'true');
+  localStorage.setItem('cadence_clean_zero_start_v4', 'true');
+  saveFocusSessions([]);
+  saveIslandState(DEFAULT_ISLAND_STATE);
   return new Promise((resolve, reject) => {
     const tx = db.transaction(['habits', 'completions'], 'readwrite');
     tx.objectStore('habits').clear();
@@ -649,18 +643,30 @@ export function buildSampleFocusSessions(todayStr: string): FocusSession[] {
   ];
 }
 
-export function loadFocusSessions(todayStr: string): FocusSession[] {
+export function loadFocusSessions(_todayStr?: string): FocusSession[] {
   try {
+    const cleanStartFlag = localStorage.getItem('cadence_clean_zero_start_v4');
     const raw = localStorage.getItem(FOCUS_STORAGE_KEY);
     if (!raw) {
-      const seeded = buildSampleFocusSessions(todayStr);
-      localStorage.setItem(FOCUS_STORAGE_KEY, JSON.stringify(seeded));
-      return seeded;
+      localStorage.setItem(FOCUS_STORAGE_KEY, JSON.stringify([]));
+      return [];
     }
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (!Array.isArray(parsed)) return [];
+    if (!cleanStartFlag && !isShowcaseModeActive()) {
+      const userOnly = parsed.filter(
+        (s: FocusSession) =>
+          s &&
+          typeof s.id === 'string' &&
+          !s.id.startsWith('focus-sample-') &&
+          !s.id.startsWith('showcase-focus-')
+      );
+      localStorage.setItem(FOCUS_STORAGE_KEY, JSON.stringify(userOnly));
+      return userOnly;
+    }
+    return parsed;
   } catch {
-    return buildSampleFocusSessions(todayStr);
+    return [];
   }
 }
 
@@ -674,12 +680,23 @@ export function saveFocusSessions(sessions: FocusSession[]): void {
 
 export function loadIslandState(): IslandState {
   try {
+    const cleanStartFlag = localStorage.getItem('cadence_clean_zero_start_v4');
     const raw = localStorage.getItem(ISLAND_STORAGE_KEY);
     if (!raw) {
       localStorage.setItem(ISLAND_STORAGE_KEY, JSON.stringify(DEFAULT_ISLAND_STATE));
       return DEFAULT_ISLAND_STATE;
     }
-    return { ...DEFAULT_ISLAND_STATE, ...JSON.parse(raw) };
+    const parsed = JSON.parse(raw) as Partial<IslandState>;
+    if (!cleanStartFlag && !isShowcaseModeActive()) {
+      const resetState: IslandState = {
+        ...DEFAULT_ISLAND_STATE,
+        ...parsed,
+        unlockedIds: [],
+      };
+      localStorage.setItem(ISLAND_STORAGE_KEY, JSON.stringify(resetState));
+      return resetState;
+    }
+    return { ...DEFAULT_ISLAND_STATE, ...parsed };
   } catch {
     return DEFAULT_ISLAND_STATE;
   }
@@ -746,7 +763,6 @@ export async function activateShowcaseData(
 }
 
 export async function restoreOriginalData(): Promise<OriginalDataSnapshot> {
-  const todayStr = formatDateKey(new Date());
   let snapshot: OriginalDataSnapshot | null = null;
 
   try {
@@ -764,8 +780,7 @@ export async function restoreOriginalData(): Promise<OriginalDataSnapshot> {
     const restoredHabits = snapshot.habits;
     const restoredCompletions = snapshot.completions || [];
     const restoredPreferences = snapshot.preferences || DEFAULT_PREFERENCES;
-    const restoredFocus =
-      snapshot.focusSessions || buildSampleFocusSessions(todayStr);
+    const restoredFocus = snapshot.focusSessions || [];
     const restoredIsland = snapshot.islandState || DEFAULT_ISLAND_STATE;
 
     await saveBulkData(
@@ -785,17 +800,16 @@ export async function restoreOriginalData(): Promise<OriginalDataSnapshot> {
     };
   }
 
-  // Fallback if snapshot was cleared manually
-  const fallback = await resetToSampleData();
-  const focusSessions = buildSampleFocusSessions(todayStr);
-  saveFocusSessions(focusSessions);
+  // Fallback if snapshot was cleared manually: restore clean 0-data state
+  await saveBulkData([], [], DEFAULT_PREFERENCES);
+  saveFocusSessions([]);
   saveIslandState(DEFAULT_ISLAND_STATE);
 
   return {
-    habits: fallback.habits,
-    completions: fallback.completions,
-    preferences: fallback.preferences,
-    focusSessions,
+    habits: [],
+    completions: [],
+    preferences: DEFAULT_PREFERENCES,
+    focusSessions: [],
     islandState: DEFAULT_ISLAND_STATE,
   };
 }

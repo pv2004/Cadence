@@ -55,6 +55,7 @@ interface SettingsScreenProps {
   isShowcaseMode?: boolean;
   onToggleShowcaseData?: () => Promise<void>;
   onClose: () => void;
+  onReplayTour?: () => void;
   canInstallPwa: boolean;
   onTriggerInstallPwa: () => void;
 }
@@ -72,6 +73,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   isShowcaseMode = false,
   onToggleShowcaseData,
   onClose,
+  onReplayTour,
   canInstallPwa,
   onTriggerInstallPwa,
 }) => {
@@ -259,9 +261,9 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
           <input
             id="settings-user-name"
             type="text"
-            value={preferences.userName ?? 'Vineeth'}
+            value={preferences.userName ?? ''}
             onChange={(e) => onUpdatePreferences({ userName: e.target.value })}
-            placeholder="Enter your name (e.g. Vineeth)"
+            placeholder="Enter your name (optional)"
             style={{
               backgroundColor: surface.high,
               borderColor: surface.outline,
@@ -270,6 +272,24 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
             className="w-full rounded-xl px-3.5 py-2 text-xs font-bold border focus:outline-none"
           />
         </div>
+        {onReplayTour && (
+          <button
+            type="button"
+            onClick={onReplayTour}
+            style={{
+              backgroundColor: surface.high,
+              borderColor: surface.outline,
+              color: surface.text,
+            }}
+            className="w-full py-2.5 px-3.5 rounded-xl border text-xs font-extrabold flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
+          >
+            <Sparkles
+              className="w-3.5 h-3.5"
+              style={{ color: surface.accent }}
+            />
+            <span>Replay Interactive App Tour</span>
+          </button>
+        )}
       </div>
 
       {/* Appearance & UI Design Modes */}

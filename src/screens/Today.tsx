@@ -77,7 +77,7 @@ const STYLE_LABEL: Record<InterfaceStyle, string> = {
 export const TodayScreen: React.FC<TodayScreenProps> = ({
   habits,
   completions,
-  userName = 'Vineeth',
+  userName = '',
   accentColor,
   interfaceStyle,
   todayCardLayout = 'list',
@@ -435,23 +435,27 @@ export const TodayScreen: React.FC<TodayScreenProps> = ({
       {/* Habit List by View Mode & Card Layout (`list` vs `grid`) */}
       {filteredHabits.length === 0 ? (
         <div
-          className="rounded-[24px] p-8 text-center"
+          className="rounded-[24px] p-8 text-center space-y-2"
           style={{ backgroundColor: surface.card }}
         >
-          <p className="text-sm font-bold" style={{ color: surface.text }}>
-            No habits in this view
+          <p className="text-sm font-extrabold" style={{ color: surface.text }}>
+            {activeHabits.length === 0
+              ? 'No habits yet — your clean slate is ready'
+              : 'No habits in this category'}
           </p>
-          <p className="text-xs mt-1" style={{ color: surface.muted }}>
-            Create a habit or switch category filters.
+          <p className="text-xs max-w-xs mx-auto" style={{ color: surface.muted }}>
+            {activeHabits.length === 0
+              ? 'Tap below to create your first daily ritual and start building your streak.'
+              : 'Create a new habit or switch category filters above.'}
           </p>
           <button
             type="button"
             onClick={onOpenNewHabit}
             style={{ backgroundColor: surface.accent }}
-            className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white"
+            className="mt-3 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-extrabold text-white shadow-sm"
           >
             <Plus className="w-4 h-4" />
-            Add Habit
+            <span>{activeHabits.length === 0 ? 'Create First Habit' : 'Add Habit'}</span>
           </button>
         </div>
       ) : viewMode === 'week' && todayCardLayout === 'list' ? (
