@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- Deep Obsidian & Royal Violet Background Gradient -->
+    <linearGradient id="bgBase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1438" />
+      <stop offset="48%" stop-color="#0D0B18" />
+      <stop offset="100%" stop-color="#07060C" />
+    </linearGradient>
+
+    <!-- Ambient Top-Left Violet Glow -->
+    <radialGradient id="topGlow" cx="22%" cy="18%" r="68%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.48" />
+      <stop offset="55%" stop-color="#6D28D9" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#0D0B18" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Ambient Bottom-Right Emerald/Cyan Glow -->
+    <radialGradient id="bottomGlow" cx="82%" cy="84%" r="60%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.34" />
+      <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#07060C" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Glassmorphic Inner Pedestal Gradient -->
+    <linearGradient id="pedestalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.11" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.03" />
+    </linearGradient>
+
+    <linearGradient id="pedestalBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C4B5FD" stop-opacity="0.45" />
+      <stop offset="50%" stop-color="#7C3AED" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#34D399" stop-opacity="0.4" />
+    </linearGradient>
+
+    <!-- Heatmap Tile Gradients (Low -> Medium -> High -> Peak Streak) -->
+    <linearGradient id="tileLow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4C1D95" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#2E1065" stop-opacity="0.45" />
+    </linearGradient>
+
+    <linearGradient id="tileMed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.82" />
+      <stop offset="100%" stop-color="#5B21B6" stop-opacity="0.75" />
+    </linearGradient>
+
+    <linearGradient id="tileHigh" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA" />
+      <stop offset="50%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#6D28D9" />
+    </linearGradient>
+
+    <linearGradient id="tilePeak" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC" />
+      <stop offset="50%" stop-color="#9333EA" />
+      <stop offset="100%" stop-color="#6B21A8" />
+    </linearGradient>
+
+    <!-- Hero Streak Check / Flame Badge Gradient -->
+    <linearGradient id="heroEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6EE7B7" />
+      <stop offset="45%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <!-- Golden Streak Flame Accent -->
+    <linearGradient id="flameGold" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A" />
+      <stop offset="45%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.55" />
+    </filter>
+
+    <filter id="emeraldGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#10B981" flood-opacity="0.6" />
+    </filter>
+
+    <filter id="flameGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#F59E0B" flood-opacity="0.65" />
+    </filter>
+  </defs>
+
+  <!-- Full-bleed iOS App Icon Canvas -->
+  <rect width="512" height="512" fill="url(#bgBase)" />
+  <rect width="512" height="512" fill="url(#topGlow)" />
+  <rect width="512" height="512" fill="url(#bottomGlow)" />
+
+  <!-- Subtle Radial Grid Rings -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="1.5" />
+  <circle cx="256" cy="256" r="155" fill="none" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1.5" />
+
+  <!-- Frosted Glass Pedestal Card -->
+  <rect
+    x="62"
+    y="62"
+    width="388"
+    height="388"
+    rx="96"
+    fill="url(#pedestalGrad)"
+    stroke="url(#pedestalBorder)"
+    stroke-width="3"
+    filter="url(#softShadow)"
+  />
+
+  <!-- 3x3 Sculpted Habit Heatmap Matrix -->
+  <g transform="translate(106, 106)">
+    <!-- Row 1 -->
+    <rect x="0" y="0" width="84" height="84" rx="24" fill="url(#tileLow)" stroke="#A78BFA" stroke-opacity="0.22" stroke-width="2" />
+    <rect x="108" y="0" width="84" height="84" rx="24" fill="url(#tileMed)" stroke="#C4B5FD" stroke-opacity="0.35" stroke-width="2" />
+    <!-- Top-Right Tile: Golden Streak Flame Badge -->
+    <g filter="url(#flameGlow)">
+      <rect x="216" y="0" width="84" height="84" rx="24" fill="url(#flameGold)" stroke="#FEF08A" stroke-opacity="0.7" stroke-width="2.5" />
+      <path
+        d="M258 19 C258 19 276 35 274 52 C273 62 266 69 258 69 C250 69 242 62 242 51 C242 44 247 38 247 38 C247 38 246 46 251 48 C249 38 258 19 258 19 Z"
+        fill="#FFFFFF"
+      />
+    </g>
+
+    <!-- Row 2 -->
+    <rect x="0" y="108" width="84" height="84" rx="24" fill="url(#tileMed)" stroke="#C4B5FD" stroke-opacity="0.35" stroke-width="2" />
+    <rect x="108" y="108" width="84" height="84" rx="24" fill="url(#tileHigh)" stroke="#DDD6FE" stroke-opacity="0.55" stroke-width="2.5" />
+    <rect x="216" y="108" width="84" height="84" rx="24" fill="url(#tilePeak)" stroke="#F3E8FF" stroke-opacity="0.65" stroke-width="2.5" />
+
+    <!-- Row 3 -->
+    <rect x="0" y="216" width="84" height="84" rx="24" fill="url(#tileHigh)" stroke="#DDD6FE" stroke-opacity="0.55" stroke-width="2.5" />
+    <rect x="108" y="216" width="84" height="84" rx="24" fill="url(#tilePeak)" stroke="#F3E8FF" stroke-opacity="0.65" stroke-width="2.5" />
+
+    <!-- Bottom-Right Tile: Luminous Emerald Completed Checkmark Badge -->
+    <g filter="url(#emeraldGlow)">
+      <rect x="216" y="216" width="84" height="84" rx="24" fill="url(#heroEmerald)" stroke="#A7F3D0" stroke-opacity="0.85" stroke-width="3" />
+      <path
+        d="M241 258 L253 270 L276 245"
+        fill="none"
+        stroke="#FFFFFF"
+        stroke-width="10.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </g>
+  </g>
+</svg>

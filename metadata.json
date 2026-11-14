@@ -1,0 +1,6 @@
+{
+  "name": "Cadence — Minimal Habit Tracker",
+  "description": "A local-first, Streak-inspired minimal habit tracker PWA for iPhone with GitHub-style activity heatmaps, flexible schedules, and offline support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
