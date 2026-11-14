@@ -778,8 +778,20 @@ export const StatisticsScreen: React.FC<StatisticsScreenProps> = ({
         body: JSON.stringify({ digest: weeklyDigest }),
       });
 
-      const data = await response.json();
+      const rawText = await response.text();
+      let data: { summary?: string; error?: string } | null = null;
+      try {
+        data = rawText ? JSON.parse(rawText) : null;
+      } catch {
+        data = null;
+      }
+
       if (!response.ok) {
+        if (response.status === 404 || response.status === 503) {
+          setAiSummary(weeklyDigest.fallbackSummary);
+          setAiError(null);
+          return;
+        }
         throw new Error(data?.error || 'Could not generate weekly analysis.');
       }
 
