@@ -886,9 +886,9 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
         <div className="flex items-center gap-3.5 pt-0.5">
           <div className="flex flex-col items-center shrink-0">
             <img
-              src="/apple-touch-icon.png?v=2"
+              src="/pwa-512x512.png?v=4"
               alt="Cadence iPhone Home Screen Icon"
-              className="w-14 h-14 rounded-[14px] shadow-md object-cover border border-white/10"
+              className="w-14 h-14 rounded-[14px] shadow-md object-cover"
             />
             <span
               className="text-[10px] font-semibold mt-1 tracking-tight"

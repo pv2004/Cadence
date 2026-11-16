@@ -215,7 +215,7 @@ export const AppTourModal: React.FC<AppTourModalProps> = ({
               }}
             >
               <img
-                src="/apple-touch-icon.png?v=2"
+                src="/pwa-512x512.png?v=4"
                 alt="Cadence Icon"
                 className="w-12 h-12 rounded-[14px] shadow-md shrink-0 object-cover"
               />

@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/apple-touch-icon.png" alt="Cadence App Icon" width="96" height="96" style="border-radius: 22px;" />
+  <img src="public/pwa-512x512.png" alt="Cadence App Icon" width="96" height="96" style="border-radius: 22px;" />
 
   # Cadence
 

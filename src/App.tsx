@@ -636,7 +636,7 @@ export default function App() {
             className="flex items-center gap-2 text-left"
           >
             <img
-              src="/apple-touch-icon.png?v=2"
+              src="/pwa-512x512.png?v=4"
               alt="Cadence App Icon"
               className="w-6 h-6 rounded-[7px] shadow-xs object-cover"
             />
